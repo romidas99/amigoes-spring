@@ -26,5 +26,6 @@ Over the next three months you will learn how to craft stunning, responsive fron
 - ✅ TypeScript for type-safe, scalable code
 - ✅ Angular for powerful, responsive front-end interfaces
 
-🎁 Bonus 6-Month IntelliJ IDEA Ultimate license worth 117.83$
+## Quick-Start
+To run the application, you need to open docker desktop before running the command ```docker compose up```
 
