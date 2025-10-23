@@ -1,5 +1,7 @@
 package com.amigoscode.s3;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.core.ResponseInputStream;
 import software.amazon.awssdk.core.sync.RequestBody;
@@ -11,8 +13,11 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 import java.io.IOException;
 
+import static java.rmi.server.LogStream.log;
+
 @Service
 public class S3Service {
+    private static final Log log = LogFactory.getLog(S3Service.class);
     private final S3Client s3;
 
     public S3Service(S3Client s3) {
