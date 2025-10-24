@@ -3,6 +3,7 @@ package com.amigoscode;
 import com.amigoscode.customer.Customer;
 import com.amigoscode.customer.CustomerRepository;
 import com.amigoscode.customer.Gender;
+import com.amigoscode.s3.S3Buckets;
 import com.amigoscode.s3.S3Service;
 import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
@@ -26,7 +27,8 @@ public class Main {
     CommandLineRunner runner(
             CustomerRepository customerRepository,
             PasswordEncoder passwordEncoder,
-            S3Service s3Service) {
+            S3Service s3Service,
+            S3Buckets s3Buckets) {
         return args -> {
 //            var faker = new Faker();
 //            Random random = new Random();
@@ -44,15 +46,19 @@ public class Main {
 //                    gender);
 //            customerRepository.save(customer);
 //            System.out.println(email);
-            s3Service.putObject("romidas99-amigoscode-customer-test",
-                    "foo",
-                    "Hello World".getBytes()
-            );
-            byte[] obj = s3Service.getObject("romidas99-amigoscode-customer-test",
-                    "foo");
-
-            System.out.println("Hooray: " + new String(obj));
+            //testBucketUploadAndDownload(s3Service, s3Buckets);
         };
+    }
+
+    private static void testBucketUploadAndDownload(S3Service s3Service, S3Buckets s3Buckets) {
+        s3Service.putObject(s3Buckets.getCustomer(),
+                "text/hooray",
+                "Hello World".getBytes()
+        );
+        byte[] obj = s3Service.getObject(s3Buckets.getCustomer(),
+                "text/hooray");
+
+        System.out.println("Hooray: " + new String(obj));
     }
 
 }
