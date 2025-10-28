@@ -139,6 +139,18 @@ public class CustomerService {
     }
 
     public byte[] getCustomerProfileImage(Integer customerId) {
+        var customer = customerDao.selectCustomerById(customerId)
+                .map(customerDTOMapper)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "customer with id [%s] not found".formatted(customerId)
+                ));
+        // TD Check if profileImageId is empty or null
+        String profileImageId = "TODO";
+        byte[] profileImage = s3Service.getObject(
+                s3Buckets.getCustomer(),
+                "profile-images/%s/%s".formatted(customerId, profileImageId)
+        );
+        return profileImage;
     }
 }
 
